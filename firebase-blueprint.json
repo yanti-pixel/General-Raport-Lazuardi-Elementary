@@ -1,0 +1,119 @@
+{
+  "entities": {
+    "Teacher": {
+      "title": "Teacher",
+      "description": "User profile for teachers",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" }
+      },
+      "required": ["uid", "name", "email"]
+    },
+    "Student": {
+      "title": "Student",
+      "description": "Student profile",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "class": { "type": "string" },
+        "teacherId": { "type": "string" }
+      },
+      "required": ["name", "class", "teacherId"]
+    },
+    "Subject": {
+      "title": "Subject",
+      "description": "Academic subject",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string", "enum": ["Mengaji", "Bahasa Indonesia", "Matematika", "Bahasa Inggris"] }
+      },
+      "required": ["name"]
+    },
+    "LearningGoal": {
+      "title": "Learning Goal",
+      "description": "Learning Goal for a subject",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "subjectId": { "type": "string" },
+        "description": { "type": "string" }
+      },
+      "required": ["subjectId", "description"]
+    },
+    "LearningObjective": {
+      "title": "Learning Objective",
+      "description": "Learning Objective within a Learning Goal",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "learningGoalId": { "type": "string" },
+        "description": { "type": "string" }
+      },
+      "required": ["learningGoalId", "description"]
+    },
+    "MonthlyReport": {
+      "title": "Monthly Report",
+      "description": "Monthly performance report for a student",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "studentId": { "type": "string" },
+        "month": { "type": "string", "description": "e.g., '2026-05'" },
+        "subjectId": { "type": "string" },
+        "learningObjectiveId": { "type": "string" },
+        "score": { "type": "number", "description": "1 to 4 or 0 to 100" },
+        "anecdote": { "type": "string" },
+        "generatedComment": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["studentId", "month", "subjectId", "score"]
+    },
+    "SemesterSummary": {
+      "title": "Semester Summary",
+      "description": "Learning Journey summary for a student",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "studentId": { "type": "string" },
+        "semester": { "type": "string", "description": "e.g., '2025/2026 Ganjil'" },
+        "learningJourney": { "type": "string" },
+        "generatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["studentId", "semester", "learningJourney"]
+    }
+  },
+  "firestore": {
+    "/teachers/{teacherId}": {
+      "schema": "Teacher",
+      "description": "Collection of teacher profiles"
+    },
+    "/students/{studentId}": {
+      "schema": "Student",
+      "description": "Collection of students"
+    },
+    "/subjects/{subjectId}": {
+      "schema": "Subject",
+      "description": "Master data for subjects"
+    },
+    "/learningGoals/{goalId}": {
+      "schema": "LearningGoal",
+      "description": "Learning goals master data"
+    },
+    "/learningObjectives/{objectiveId}": {
+      "schema": "LearningObjective",
+      "description": "Learning objectives master data"
+    },
+    "/monthlyReports/{reportId}": {
+      "schema": "MonthlyReport",
+      "description": "Monthly student records"
+    },
+    "/semesterSummaries/{summaryId}": {
+      "schema": "SemesterSummary",
+      "description": "Overall semester summaries"
+    }
+  }
+}

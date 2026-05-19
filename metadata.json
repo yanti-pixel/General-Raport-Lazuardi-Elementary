@@ -1,0 +1,6 @@
+{
+  "name": "Lazuardi Report Comment Generator",
+  "description": "Aplikasi pembantu guru untuk membuat komentar rapor bulanan dan rangkuman semester secara otomatis berdasarkan Learning Goals dan Objectives.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
